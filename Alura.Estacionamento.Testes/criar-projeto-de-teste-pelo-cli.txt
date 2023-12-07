@@ -1,0 +1,26 @@
+﻿Podemos também usar a linha de comando para a adição deste projeto de teste à nossa solução. Navegue no terminal até a pasta do projeto e usando a CLI (command line interface), digite o seguinte comando: dotnet new xunit -o ProjetoTeste.Tests. Como resultado teremos:
+
+PM> dotnet new xunit -o Alura.Estacionamento.Tests
+Preparando...
+O modelo "xUnit Test Project" foi criado com êxito.
+
+Processando ações pós-criação...
+Executando 'dotnet restore' em Alura.Estacionamento.Tests\Alura.Estacionamento.Tests.csproj...
+  Determinando os projetos a serem restaurados...
+….Alura.Estacionamento\Alura.Estacionamento.Tests\Alura.Estacionamento.Tests.csproj restaurado (em 728 ms).
+A restauração foi bem-sucedida.COPIAR CÓDIGO
+Em seguida, será necessário adicionar o projeto com o comando: dotnet sln add ./ProjetoTeste.Tests/ProjetoTeste.Tests.csproj
+
+A saída será:
+
+PM> dotnet sln add ./Alura.Estacionamento.Tests/Alura.Estacionamento.Tests.csproj
+O projeto 'Alura.Estacionamento.Tests\Alura.Estacionamento.Tests.csproj' foi adicionado … solução.COPIAR CÓDIGO
+E para que o projeto Reconheça o código que será alvo do teste, vamos adicionar uma referência com o comando: dotnet add ./ProjetoTeste.Tests/ProjetoTeste.Tests.csproj reference ./ProjetoAlvoTeste/ProjetoAlvoTeste.csproj.
+
+Quando executarmos o comando, teremos uma saída como em:
+
+PM> dotnet sln add ./Alura.Estacionamento.Tests/Alura.Estacionamento.Tests.csproj
+O projeto 'Alura.Estacionamento.Tests\Alura.Estacionamento.Tests.csproj' foi adicionado … solução.
+PM> dotnet add ./Alura.Estacionamento.Tests/Alura.Estacionamento.Tests.csproj reference ./Alura.Estacionamento/Alura.Estacionamento.csproj 
+A referência '..\Alura.Estacionamento\Alura.Estacionamento.csproj' foi adicionada ao projeto.COPIAR CÓDIGO
+Saber utilizar a linha de comando é muito importante para a pessoa que desenvolve, por isso pratique também a criação de soluções e configurações de projetos usando a CLI.
