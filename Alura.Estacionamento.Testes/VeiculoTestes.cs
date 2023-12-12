@@ -1,3 +1,4 @@
+using Alura.Estacionamento.Alura.Estacionamento.Modelos;
 using Alura.Estacionamento.Modelos;
 
 namespace Alura.Estacionamento.Testes
@@ -28,6 +29,24 @@ namespace Alura.Estacionamento.Testes
         public void ValidaNomeProprietario()
         {
 
+        }
+
+        [Fact]
+        public void DadosVeiculo() 
+        {
+            //Arrange
+            Veiculo veiculo = new Veiculo();
+            veiculo.Proprietario = "Alberto Araujo";
+            veiculo.Tipo = TipoVeiculo.Automovel;
+            veiculo.Cor = "Verde";
+            veiculo.Modelo = "Variant";
+            veiculo.Placa = "ASD-9999";
+
+            //Act
+            string dados = veiculo.GerarFicha();
+
+            //Assert
+            Assert.Contains("Tipo do veículo: Automovel", dados);
         }
     }
 }
