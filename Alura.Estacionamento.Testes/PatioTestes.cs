@@ -84,6 +84,7 @@ namespace Alura.Estacionamento.Testes
             Assert.Equal(placa, consultado.Placa);
 
         }
+
     }
 }
 
