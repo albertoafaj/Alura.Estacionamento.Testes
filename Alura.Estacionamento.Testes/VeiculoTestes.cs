@@ -1,15 +1,25 @@
 using Alura.Estacionamento.Alura.Estacionamento.Modelos;
 using Alura.Estacionamento.Modelos;
+using Xunit.Abstractions;
 
 namespace Alura.Estacionamento.Testes
 {
-    public class VeiculoTestes
+    public class VeiculoTestes : IDisposable
     {
+        private Veiculo veiculo;
+        public ITestOutputHelper SaidaConsoleTeste;
+        public VeiculoTestes(ITestOutputHelper _saidaConsoleTeste)
+        {
+            veiculo = new Veiculo();
+            SaidaConsoleTeste = _saidaConsoleTeste;
+            SaidaConsoleTeste.WriteLine("Construtor invocado");
+        }
+
         [Fact (DisplayName ="Teste nº1")]
         public void TestaAcelerar()
         {
             //Arrange - Inicialização das variáveis
-            Veiculo veiculo = new Veiculo();
+            //Veiculo veiculo = new Veiculo();
             //Act - Invocação do método que será testado
             veiculo.Acelerar(10);
             //Assert - Verificação do resultado
@@ -19,7 +29,7 @@ namespace Alura.Estacionamento.Testes
         public void TestaFreiar()
         {
             //Arrange
-            Veiculo veiculo = new Veiculo();
+            //Veiculo veiculo = new Veiculo();
             //Act
             veiculo.Frear(8);
             //Assert
@@ -35,7 +45,7 @@ namespace Alura.Estacionamento.Testes
         public void DadosVeiculo() 
         {
             //Arrange
-            Veiculo veiculo = new Veiculo();
+            //Veiculo veiculo = new Veiculo();
             veiculo.Proprietario = "Alberto Araujo";
             veiculo.Tipo = TipoVeiculo.Automovel;
             veiculo.Cor = "Verde";
@@ -47,6 +57,11 @@ namespace Alura.Estacionamento.Testes
 
             //Assert
             Assert.Contains("Tipo do veículo: Automovel", dados);
+        }
+
+        public void Dispose()
+        {
+            SaidaConsoleTeste.WriteLine("Dispose invocado");
         }
     }
 }
