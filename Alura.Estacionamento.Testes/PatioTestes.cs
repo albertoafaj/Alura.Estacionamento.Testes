@@ -71,8 +71,8 @@ namespace Alura.Estacionamento.Testes
         }
 
         [Theory]
-        [InlineData("Alberto Araujo", "ASD-9999", "Verde", "Fusca")]
-        public void LocalizaVeiculoNoPatio(string proprietario, string placa, string cor, string modelo)
+        [InlineData("Alberto Araujo", "ASD-9997", "Verde", "Fusca")]
+        public void LocalizaVeiculoNoPatioComBaseNoIdTicket(string proprietario, string placa, string cor, string modelo)
         {
             // Arrange
             veiculo.Proprietario = proprietario;
@@ -85,10 +85,10 @@ namespace Alura.Estacionamento.Testes
 
             // Act
 
-            Veiculo consultado = estacionamento.PesquisaVeiculo(placa);
+            Veiculo consultado = estacionamento.PesquisaVeiculo(estacionamento.IdTicket);
 
             // Assert
-            Assert.Equal(placa, consultado.Placa);
+            Assert.Contains("ASD-9997", consultado.Placa);
 
         }
 

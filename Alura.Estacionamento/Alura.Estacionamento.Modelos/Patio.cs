@@ -20,7 +20,10 @@ namespace Alura.Estacionamento.Modelos
         private List<Veiculo> veiculos;
         private double faturado;
         public double Faturado { get => faturado; set => faturado = value; }
-        public List<Veiculo> Veiculos { get => veiculos; set => veiculos = value; }       
+        public List<Veiculo> Veiculos { get => veiculos; set => veiculos = value; }
+        public string IdTicket { get; set; }
+        public string Ticket { get; set; }
+        
         public double TotalFaturado()
         {
             return this.Faturado;
@@ -34,7 +37,8 @@ namespace Alura.Estacionamento.Modelos
 
         public void RegistrarEntradaVeiculo(Veiculo veiculo)
         {
-            veiculo.HoraEntrada = DateTime.Now;            
+            veiculo.HoraEntrada = DateTime.Now;
+            this.GerarTicket(veiculo);
             this.Veiculos.Add(veiculo);            
         }
 
@@ -84,11 +88,12 @@ namespace Alura.Estacionamento.Modelos
             return informacao;
         }
 
-        public Veiculo PesquisaVeiculo(string placa)
+        public Veiculo PesquisaVeiculo(string idTicket)
         {
+
             Veiculo veiculoEncontrado = (from veiculo in this.Veiculos
-                                      where veiculo.Placa == placa
-                                      select veiculo).SingleOrDefault();
+                                      where this.IdTicket == idTicket
+                                       select veiculo).SingleOrDefault();
             return veiculoEncontrado;
         }
 
@@ -100,9 +105,18 @@ namespace Alura.Estacionamento.Modelos
 
             veiculoQueDeveSerAlterado.AlterarDados(novosDadosVeiculo);
 
-            Veiculo veiculoAlterado = PesquisaVeiculo(veiculoQueDeveSerAlterado.Placa);
 
-            return veiculoAlterado;
+            return veiculoQueDeveSerAlterado;
+        }
+
+        private string GerarTicket(Veiculo veiculo)
+        {
+            this.IdTicket = new Guid().ToString().Substring(0, 5);
+            this.Ticket = "### Ticket Estacionamento Alura ###" +
+                $">>> Identificador: {this.IdTicket}" +
+                $">>> Data/Hora de Entrada: {DateTime.Now}" +
+                $">>> Placa do Veículo: {veiculo.Placa}";
+            return this.Ticket;
         }
 
     }
