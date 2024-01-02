@@ -14,6 +14,7 @@ namespace Alura.Estacionamento.Testes
     {
         Patio estacionamento;
         Veiculo veiculo ;
+        Operador operador;
         public ITestOutputHelper SaidaConsoleTeste;
 
         public PatioTestes(ITestOutputHelper _saidaConsoleTeste)
@@ -22,6 +23,9 @@ namespace Alura.Estacionamento.Testes
             estacionamento = new Patio();
             SaidaConsoleTeste = _saidaConsoleTeste;
             SaidaConsoleTeste.WriteLine("Construtor invocado");
+            operador = new Operador();
+            operador.Nome = "Zé";
+            estacionamento.OperadorPatio = operador;
         }
 
         [Fact]
@@ -33,7 +37,6 @@ namespace Alura.Estacionamento.Testes
             veiculo.Cor = "Verde";
             veiculo.Modelo = "Fusca";
             veiculo.Placa = "ASD-9999";
-
             estacionamento.RegistrarEntradaVeiculo(veiculo);
             estacionamento.RegistrarSaidaVeiculo(veiculo.Placa);
 
