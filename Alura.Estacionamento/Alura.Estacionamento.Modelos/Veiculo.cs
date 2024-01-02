@@ -67,7 +67,18 @@ namespace Alura.Estacionamento.Modelos
         public string Modelo { get; set; }        
         public string Proprietario
         {
-            get; set;
+            get
+            {
+                return _proprietario;
+            }
+            set
+            {
+                if (value.Length < 3)
+                {
+                    throw new System.FormatException("Nome do propriétário deve ter pelo menos 3 caracteres");
+                }
+                _proprietario = value;
+            }
         }
         public DateTime HoraEntrada { get; set; }
         public DateTime HoraSaida { get; set; }   
@@ -83,7 +94,25 @@ namespace Alura.Estacionamento.Modelos
         {
             this.VelocidadeAtual -= (tempoSeg * 15);
         }
-               
+
+        public void AlterarDados(Veiculo novosDadosVeiculo)
+        {
+            this.Proprietario = novosDadosVeiculo.Proprietario;
+            this.Modelo = novosDadosVeiculo.Modelo;
+            this.Largura = novosDadosVeiculo.Largura;
+            this.Cor = novosDadosVeiculo.Cor;
+        }
+
+        public string GerarFicha()
+        {
+            return  $"Fiha do veículo:\n" +
+                    $"Tipo do veículo: {this.Tipo.ToString()}\n" +
+                    $"Proprietário:{this.Proprietario}\n" +                   
+                    $"Modelo:{this.Modelo}\n" +                 
+                    $"Cor:{this.Cor}\n" +        
+                    $"Placa:{this.Placa}\n";
+        }
+
         //Construtor
         public Veiculo()
         {
@@ -94,6 +123,8 @@ namespace Alura.Estacionamento.Modelos
         {
            Proprietario = proprietario;
         }
+
+
 
        
     }
